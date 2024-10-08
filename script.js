@@ -1,4 +1,4 @@
-
+//b6ebb9fd191b4f4bb0209c67482f0c00
 const apiKey = "8645a9321dee4d5b8586c536594c87bb";
 const pageSize = 15;
 let category = "general";
@@ -31,25 +31,31 @@ document.addEventListener("DOMContentLoaded", function() {
         const newsList = document.querySelector(".news-list");
         
         newsList.innerHTML = '';
-        articles.forEach(article => {
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `
+            articles.forEach(article => {
+                const listItem = document.createElement("li");
+                let srcImg = article.urlToImage || "";
+                let articleURl = article.url || "#"
+                if(article.urlToImage) {srcImg = article.urlToImage} else srcImg = ""; 
+                if(article.url) {articleURl = article.url} else articleURl = ""; 
+                listItem.innerHTML = `
                 <div class="info">
-                <div class="author">
-                <span>Author:</span>
-                <span title = "${article.author}" class ="author">${truncateString(article.author ||"UnKhown" ,4) || "UnKhown"}</span></div>
-                <div class="published-at">${new Date (article.publishedAt).toDateString()}</div>
+                    <div class="author">
+                        <span>Author:</span>
+                        <span title="${article.author || 'Unknown'}" class="author">${truncateString(article.author || 'Unknown', 4)}</span>
+                    </div>
+                    <div class="published-at">${new Date(article.publishedAt).toDateString()}</div>
                 </div>
-                <img src="${article.urlToImage}" alt="${article.title}">
-                <a href="${article.url}" target="_blank">${article.title}</a>
-                <p class="description">${article.description}</p>
+                <img src="${srcImg}" alt="${article.title}">
+                <a href="${articleURl}" target="_blank">${article.title}</a>
+                <p class="description">${article.description || 'No description available'}</p>
                 <div class="source">
-                    ${article.source.name}
+                    ${article.source?.name || 'Unknown'}
                 </div>
-            `
-            newsList.appendChild(listItem);
-            
-        });
+                `
+                newsList.appendChild(listItem);
+                
+            });
+        
     
     };
     
