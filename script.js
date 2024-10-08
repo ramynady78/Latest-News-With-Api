@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
     function fetchNews(){
-        const url = `http://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${apiKey}&pageSize=${pageSize}`
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${apiKey}&pageSize=${pageSize}`
         fetch(url)
         .then(respone => respone.json())
         .then(date => {
