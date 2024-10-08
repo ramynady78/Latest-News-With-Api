@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const newsList = document.querySelector(".news-list");
         
         newsList.innerHTML = '';
+        if (articles && articles.length > 1){
             articles.forEach(article => {
                 const listItem = document.createElement("li");
                 let srcImg = article.urlToImage || "";
@@ -55,6 +56,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 newsList.appendChild(listItem);
                 
             });
+        } else {
+            newsList.innerHTML = "no news to show"
+        }
         
     
     };
